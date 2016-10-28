@@ -1,0 +1,57 @@
+﻿<html>
+<head>
+<title>Календарь</title>
+<meta charset="utf-8" content='Content-type: application/json'>
+<link rel="stylesheet" type="text/css" href="main.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <form action="index.html">
+  <div id="maket1"></div>
+  <div id="calendar">
+        <div class="header">   
+		    <a href="#datacalendar" onclick="javascript: var event_M=change_now (new Date());eventD.mon= event_M.m;   eventD.yynow = event_M.y;  eventD.dat=event_M.dn; eventD.week=event_M.nw;"> 
+			 <div id="datastr">
+                <script type="text/javascript" >
+				        var eventdat = now_date_clock ();						
+						var eventD = JSON.parse(eventdat, function(key, value) {if (key == 'dat') return new Date(value); return value;});  
+						var eventD_now = eventD;					
+	            </script>
+		
+             </div>
+	        </a>	
+		</div> 
+		<div class="main">
+		  <table id="monthi" ><tbody>
+		    <td><input type="button" value="<" id="backi" onclick="javascript: var event_M=change_month_back (eventD.mon,eventD.yynow,0);
+				eventD.mon= event_M.m;   eventD.yynow = event_M.y;  eventD.dat=event_M.dn; eventD.week=event_M.nw;"> </td> 
+		   <td id='mon'><script>document.getElementById('mon').innerHTML = eventD.mon ; </script></td><td id='yearmon'><script>document.getElementById('yearmon').innerHTML = eventD.yynow ; </script></td>
+		   <td><input type="button" value=">" id="nexti" onclick="javascript: var event_M=change_month_back (eventD.mon,eventD.yynow,1);
+		   eventD.mon= event_M.m;   eventD.yynow = event_M.y;  eventD.dat=event_M.dn; eventD.week=event_M.nw;"></td>
+		   </tbody></table>
+		   <table id="dayweek"> <thead>
+		                        <td>Пн</td><td>Вт</td><td>Ср</td><td>Чт</td><td>Пт</td><td>Сб</td><td>Вс</td>
+								</thead>
+		                        <tbody id="dayweek1"><script>new_calendar (eventD.dat);</script></tbody>
+								<a name="datacalendar" ></a>
+		   </table>
+		</div> <!-- main -->
+        <div class="clock"> 
+            <!--<div id="circle">-->
+			    <canvas id="myCanvas" ></canvas>
+				    <script> onload = initClock; </script>		
+			<!--</div>-->
+		</div> <!-- clock -->
+		<div class="add">
+		   <div id="timeserv"><script>document.getElementById('timeserv').innerHTML = eventD.ts;
+		   </script></div>
+		   <div id="weekday"><script>document.getElementById('weekday').innerHTML = eventD.week;</script></div>
+		</div> <!-- add -->   
+		<div class="footer"> <a id="send_inq" href="#" >Отправить запрос </a>
+		</div> <!--footer-->  
+		<input type="hidden" id="deltaT">
+  </div>	  
+</form>		   
+</BODY>
+</HTML>
